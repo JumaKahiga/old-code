@@ -1,0 +1,60 @@
+﻿@model RoleLogin.Models.Product
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
+@section Scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".datefield").datepicker();
+            $("#DOB").datepicker();
+            $("#LastDate").datepicker();
+            $("#cale").datepicker();
+        });
+    </script>
+}
+@using (Html.BeginForm("Upload", "Product", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <table>
+       <tr>
+        <td><b>Department Id :</b> </td>
+        <td>@Html.DropDownList("DepartmentId", String.Empty)
+        @Html.ValidationMessageFor(model => model.DepartmentId)</td>
+    </tr>
+        <tr>
+            <td><b>Product Name :</b> </td>
+            <td>@Html.EditorFor(model => model.ProductName) @Html.ValidationMessageFor(model => model.ProductName)</td>
+        </tr>
+        <tr>
+            <td><b>Supplier Name :</b> </td>
+            <td>@Html.EditorFor(model => model.SupplierName, new { @id = "SupplierName", }) </td>
+        </tr>
+        <tr>
+            <td><b>Supplier Detail :</b> </td>
+            <td>@Html.EditorFor(model => model.SupplierDetail, new { @id = "SupplierDetail" }) </td>
+        </tr>
+        @*<tr>
+                <td></td>
+                <td><input type="file" name="uploadImages" multiple="multiple" class="input-files" /> </td>
+            </tr>*@
+        <tr>
+            <td></td>
+            <td><input type="submit" value="Upload" /></td>
+
+            <td>
+                <div>
+                @Html.ActionLink("Back to List", "Index")
+                </div>
+            </td>
+        </tr>
+
+    </table>
+}

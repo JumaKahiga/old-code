@@ -1,0 +1,71 @@
+﻿@model RoleLogin.Models.Employee
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>Employee</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.EmpName)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.EmpName)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.DepartmentId)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.DepartmentId)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ManagerName)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ManagerName)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.DOB)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.DOB)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.LastDate)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.LastDate)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Salary)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Salary)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.PreviousEmployer)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.PreviousEmployer)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Appraisal)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Appraisal)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.EmpId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

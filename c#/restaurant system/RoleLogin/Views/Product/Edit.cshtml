@@ -1,0 +1,64 @@
+﻿@model RoleLogin.Models.Product
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Product</legend>
+
+        @Html.HiddenFor(model => model.ProductId)
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ProductName)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ProductName)
+            @Html.ValidationMessageFor(model => model.ProductName)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.DepartmentId)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.DepartmentId)
+            @Html.ValidationMessageFor(model => model.DepartmentId)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.SupplierName)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.SupplierName)
+            @Html.ValidationMessageFor(model => model.SupplierName)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.SupplierDetail)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.SupplierDetail)
+            @Html.ValidationMessageFor(model => SupplierDetail)
+        </div>
+
+
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

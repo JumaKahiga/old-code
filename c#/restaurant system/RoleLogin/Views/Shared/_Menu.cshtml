@@ -1,0 +1,22 @@
+﻿@{
+    var menus = new[]
+                {
+                   new { LinkText="Employee", ActionName="Index",ControllerName="Employee",Roles="Director"  },
+                   new { LinkText="Department", ActionName="Index",ControllerName="Department",Roles="Director"  },
+                   new { LinkText="AcessRole", ActionName="RoleCreate",ControllerName="Account",Roles="Director"  },
+                   new { LinkText="Product", ActionName="Index",ControllerName="Product",Roles="Director"  },
+                };
+}
+<ul id="menu">
+    @if (HttpContext.Current.User.Identity.IsAuthenticated)
+    {
+        var links = from item in menus
+                    where item.Roles.Split(new String[] { "," }, StringSplitOptions.RemoveEmptyEntries)
+                    .Any(x => new String[] { "Director" }.Contains(x))
+                    select item;
+        foreach (var link in links)
+        {
+            @:<li> @Html.ActionLink(link.LinkText, link.ActionName, link.ControllerName)</li>
+        }
+    }
+</ul> 

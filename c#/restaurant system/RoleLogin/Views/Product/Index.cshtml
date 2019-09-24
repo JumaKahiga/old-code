@@ -1,0 +1,66 @@
+﻿@model IEnumerable<RoleLogin.Models.Product>
+
+@{
+    ViewBag.Title = "Index";
+    WebGrid grid = new WebGrid(Model, rowsPerPage: 5);
+}
+
+<h2>Index</h2>
+
+<style type="text/css">
+    .table {
+        margin: 4px;
+        border-collapse: collapse;
+        width: auto;
+    }
+
+    .header {
+        background-color: lightblue;
+        font-weight: bold;
+        color: #fff;
+    }
+
+    .table th, .table td {
+        border: 1px solid black;
+        padding: 5px;
+    }
+</style>
+
+@grid.GetHtml(
+
+        tableStyle: "table", // applying style on grid
+
+        fillEmptyRows: true,
+        //show empty row when there is only one record on page to it will display all empty rows there.
+        headerStyle: "header", //applying style.
+
+        footerStyle: "grid-footer", //applying style.
+
+        mode: WebGridPagerModes.All, //paging to grid
+        firstText: "<< First",
+        previousText: "< Prev",
+        nextText: "Next >",
+        lastText: "Last >>",
+
+         columns: new[] {
+         grid.Column("ProductId",header: "Product Id"),
+         grid.Column("DepartmentId",header: "Department Id"),
+         grid.Column("ProductName",header: "Product Name"),
+         grid.Column("SupplierName",header: "Supplier Name"),
+         grid.Column("SupplierDetail",header: "Supplier Detail"),
+         grid.Column("ContactusId", header: "Action", canSort:false,
+         format:@<text>
+            <input type="button" value="Edit" onclick="location.href='@Url.Action("Edit", "Product", new { id = item.ProductId})'" />
+            <input type="button" value="Delete" onclick="location.href='@Url.Action("Delete", "Product", new { id = item.ProductId})'" />
+        </text>
+        ),
+        @*grid.Column("ContactusId", header: "Emp Pic", canSort:false,
+             format:@<text>
+                <img src="@Url.Content(item.ItemArtUrl)" height="100" width="100" />
+                <img src="@item.ItemArtUrl" height="100" width="100" />
+                </text>
+            ),*@
+     })
+<p>
+    <input type="button" value="Add New Product" onclick="location.href='@Url.Action("Create", "Product")'" />
+</p>

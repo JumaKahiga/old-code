@@ -1,0 +1,144 @@
+﻿@*@model IEnumerable<RoleLogin.Models.Employee>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.EmpName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DepartmentId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ManagerName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DOB)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LastDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Salary)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PreviousEmployer)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Appraisal)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.EmpName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DepartmentId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ManagerName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DOB)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LastDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Salary)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PreviousEmployer)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Appraisal)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.EmpId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.EmpId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.EmpId })
+        </td>
+    </tr>
+}
+
+</table>*@
+
+@model IEnumerable<RoleLogin.Models.Employee>
+
+    @{
+        ViewBag.Title = "Index";
+        WebGrid grid = new WebGrid(Model, rowsPerPage: 5);
+    }
+
+    <h2>Index</h2>
+  
+    <style type="text/css">
+        .table {
+            margin: 4px;
+            border-collapse: collapse;
+            width: auto;
+        }
+
+        .header {
+            background-color: lightblue;
+            font-weight: bold;
+            color: #fff;
+        }
+
+        .table th, .table td {
+            border: 1px solid black;
+            padding: 5px;
+        }
+    </style>
+   
+    @grid.GetHtml(
+
+        tableStyle: "table", // applying style on grid
+
+        fillEmptyRows: true,
+            //show empty row when there is only one record on page to it will display all empty rows there.
+        headerStyle: "header", //applying style.
+
+        footerStyle: "grid-footer", //applying style.
+
+        mode: WebGridPagerModes.All, //paging to grid
+        firstText: "<< First",
+        previousText: "< Prev",
+        nextText: "Next >",
+        lastText: "Last >>",
+
+         columns: new[] {
+         grid.Column("EmpName",header: "Employee Name"),
+         grid.Column("ManagerName",header: "Manager Name"),
+         grid.Column("DOB"),
+         grid.Column("LastDate"),
+         grid.Column("PreviousEmployer"),
+         grid.Column("Appraisal"),
+         grid.Column("Salary"),
+         grid.Column("ContactusId", header: "Action", canSort:false,
+         format:@<text>
+            <input type="button" value="Edit" onclick="location.href='@Url.Action("Edit", "Employee", new { id = item.EmpId})'" />
+            <input type="button" value="Delete" onclick="location.href='@Url.Action("Delete", "Employee", new { id = item.EmpId})'" />
+          </text>
+        ),
+        @*grid.Column("ContactusId", header: "Emp Pic", canSort:false,
+         format:@<text>
+            <img src="@Url.Content(item.ItemArtUrl)" height="100" width="100" />
+            <img src="@item.ItemArtUrl" height="100" width="100" />
+            </text>
+        ),*@
+     })
+<p>
+    <input type="button" value="Add New Employee" onclick="location.href='@Url.Action("Create", "Employee")'" />
+</p>

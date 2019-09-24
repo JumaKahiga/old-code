@@ -1,0 +1,85 @@
+﻿@*@model IEnumerable<RoleLogin.Models.Department>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table>
+    <tr>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.DepartmentId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.DepartmentId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.DepartmentId })
+        </td>
+    </tr>
+}
+
+</table>*@
+
+@model IEnumerable<RoleLogin.Models.Department>
+
+@{
+    ViewBag.Title = "Index";
+    WebGrid grid = new WebGrid(Model, rowsPerPage: 5);
+}
+
+<h2>Index</h2>
+
+<style type="text/css">
+    .table {
+        margin: 4px;
+        border-collapse: collapse;
+        width: auto;
+    }
+
+    .header {
+        background-color: lightblue;
+        font-weight: bold;
+        color: #fff;
+    }
+
+    .table th, .table td {
+        border: 1px solid black;
+        padding: 5px;
+    }
+</style>
+
+@grid.GetHtml(
+
+        tableStyle: "table", // applying style on grid
+
+        fillEmptyRows: true,
+        //show empty row when there is only one record on page to it will display all empty rows there.
+        headerStyle: "header", //applying style.
+
+        footerStyle: "grid-footer", //applying style.
+
+        mode: WebGridPagerModes.All, //paging to grid
+        firstText: "<< First",
+        previousText: "< Prev",
+        nextText: "Next >",
+        lastText: "Last >>",
+
+         columns: new[] {
+         grid.Column("DepartmentId",header: "Department Id"),
+         grid.Column("DeptName",header: "Department Name"),
+         grid.Column("ContactusId", header: "Action", canSort:false,
+         format:@<text>
+            <input type="button" value="Edit" onclick="location.href='@Url.Action("Edit", "Department", new { id = item.DepartmentId })'" />
+            <input type="button" value="Delete" onclick="location.href='@Url.Action("Delete", "Department", new { id = item.DepartmentId })'" />
+        </text>
+        )
+     })
+<p>
+    <input type="button" value="Add New Department" onclick="location.href='@Url.Action("Create", "Department")'" />
+</p>

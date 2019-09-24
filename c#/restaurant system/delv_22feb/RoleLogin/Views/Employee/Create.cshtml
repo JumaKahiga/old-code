@@ -1,0 +1,154 @@
+﻿@model RoleLogin.Models.Employee
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
+@section Scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".datefield").datepicker();
+            $("#DOB").datepicker();
+            $("#LastDate").datepicker();
+            $("#cale").datepicker();
+        });
+    </script>
+}
+@using (Html.BeginForm("Upload", "Employee", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <table>
+        <tr>
+            <td><b>Emp Name :</b> </td>
+            <td>@Html.EditorFor(model => model.EmpName)@Html.ValidationMessageFor(model => model.EmpName) </td>
+        </tr>
+        <tr>
+            <td><b>Manager Name :</b> </td>
+            <td>@Html.EditorFor(model => model.ManagerName) @Html.ValidationMessageFor(model => model.ManagerName)</td>
+        </tr>
+        <tr>
+            <td><b>DOB :</b> </td>
+            <td>@Html.EditorFor(model => model.DOB, new { @id = "DOB", }) </td>
+        </tr>
+        <tr>
+            <td><b>Rank :</b> </td>
+            <td>@Html.DropDownListFor(model => model.Rank, Enum.GetNames(typeof(RoleLogin.Models.Rank)).Select(e => new SelectListItem { Text = e })) </td>
+        </tr>
+        <tr>
+            <td><b>Last Date :</b> </td>
+            <td>@Html.EditorFor(model => model.LastDate, new { @id = "LastDate" }) </td>
+        </tr>
+        <tr>
+            <td><b>Salary :</b> </td>
+            <td>@Html.EditorFor(model => model.Salary) @Html.ValidationMessageFor(Model => Model.Salary) </td>
+        </tr>
+        <tr>
+            <td><b>Previous Employer :</b> </td>
+            <td>@Html.EditorFor(model => model.PreviousEmployer) @Html.ValidationMessageFor(model => model.PreviousEmployer) </td>
+        </tr>
+        <tr>
+            <td><b>Appraisal :</b> </td>
+            <td>@Html.EditorFor(model => model.Appraisal) @Html.ValidationMessageFor(model => model.Appraisal)</td>
+        </tr>
+        @*<tr>
+            <td></td>
+            <td><input type="file" name="uploadImages" multiple="multiple" class="input-files" /> </td>
+        </tr>*@
+            <tr>
+                <td></td>
+                <td><input type="submit" value="Upload" /></td>
+            </tr>
+
+</table>
+}
+
+
+
+@*@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Employee</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.EmpName)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.EmpName)
+            @Html.ValidationMessageFor(model => model.EmpName)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.DepartmentId)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.DepartmentId)
+            @Html.ValidationMessageFor(model => model.DepartmentId)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ManagerName)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ManagerName)
+            @Html.ValidationMessageFor(model => model.ManagerName)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.DOB)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.DOB)
+            @Html.ValidationMessageFor(model => model.DOB)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.LastDate)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.LastDate)
+            @Html.ValidationMessageFor(model => model.LastDate)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Salary)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Salary)
+            @Html.ValidationMessageFor(model => model.Salary)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.PreviousEmployer)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.PreviousEmployer)
+            @Html.ValidationMessageFor(model => model.PreviousEmployer)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Appraisal)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Appraisal)
+            @Html.ValidationMessageFor(model => model.Appraisal)
+        </div>
+
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}*@
